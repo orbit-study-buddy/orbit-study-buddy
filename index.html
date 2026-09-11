@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Orbit — Study Assistant</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header><div class="brand">Orbit</div><div class="badge">Pilot: 20 students</div></header>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">AI study assistant</p>
+      <h1>Learn smarter with Orbit.</h1>
+      <p>Ask questions, understand lessons, and study from your own materials.</p>
+      <div class="plan"><strong>₹99/month</strong><span>15 questions/day</span><span>7-day trial</span></div>
+      <button onclick="showApp()">Open Orbit</button>
+    </section>
+
+    <section id="app" class="app hidden">
+      <div class="topline">
+        <div><strong>Student account</strong><small id="remaining">15 questions remaining today</small></div>
+        <span class="status">Active</span>
+      </div>
+      <div id="messages" class="messages">
+        <div class="msg bot">Hi! I'm Orbit. What would you like to study today?</div>
+      </div>
+      <form id="chatForm">
+        <input id="question" autocomplete="off" placeholder="Ask a study question…" required>
+        <button>Ask</button>
+      </form>
+      <p class="note">Pilot limit: 15 student questions per day.</p>
+    </section>
+  </main>
+<script>
+let used = 0;
+const LIMIT = 15;
+function showApp(){document.querySelector('.hero').classList.add('hidden');document.querySelector('#app').classList.remove('hidden');}
+function update(){document.querySelector('#remaining').textContent=(LIMIT-used)+' questions remaining today';}
+document.querySelector('#chatForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  if(used>=LIMIT){alert('Daily question limit reached. Please try again tomorrow.');return;}
+  const input=document.querySelector('#question');
+  const q=input.value.trim(); if(!q)return;
+  used++;
+  const messages=document.querySelector('#messages');
+  messages.innerHTML += `<div class="msg user"></div><div class="msg bot">Demo reply: In the production version, Orbit will answer this using the AI service.</div>`;
+  messages.querySelector('.user:last-of-type').textContent=q;
+  input.value=''; update();
+});
+update();
+</script>
+</body>
+</html>
