@@ -33,21 +33,7 @@
     </section>
   </main>
 <script>
-let used = 0;
-const LIMIT = 15;
-function showApp(){document.querySelector('.hero').classList.add('hidden');document.querySelector('#app').classList.remove('hidden');}
-function update(){document.querySelector('#remaining').textContent=(LIMIT-used)+' questions remaining today';}
-document.querySelector('#chatForm').addEventListener('submit', e=>{
-  e.preventDefault();
-  if(used>=LIMIT){alert('Daily question limit reached. Please try again tomorrow.');return;}
-  const input=document.querySelector('#question');
-  const q=input.value.trim(); if(!q)return;
-  used++;
-  const messages=document.querySelector('#messages');
-  messages.innerHTML += `<div class="msg user"></div><div class="msg bot">Demo reply: In the production version, Orbit will answer this using the AI service.</div>`;
-  messages.querySelector('.user:last-of-type').textContent=q;
-  input.value=''; update();
-});
+let used equals 0. Const LIMIT equals 15. function showApp. Hide hero, show app. Function update. Set remaining text. Add submit listener with limit check. Append user and demo reply messages
 update();
 </script>
 </body>
